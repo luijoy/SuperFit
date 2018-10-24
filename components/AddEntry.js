@@ -4,6 +4,8 @@ import {getMetricMetaInfo, timeToString} from '../utils/helpers';
 import SuperFitSlider from './SuperFitSlider';
 import SuperFitSteppers from './SuperFitSteppers';
 import DateHeader from './DateHeader';
+import {Ionicons} from '@expo/vector-icons';
+import TextButton from './TextButton';
 
 function SubmitBtn({onPress}) {
   return (
@@ -70,8 +72,30 @@ export default class AddEntry extends Component {
 
     // Clear local notifications
   };
+  reset = () => {
+    const key = timeToString ();
+
+    // Update Redux
+
+    // Route to home
+
+    // Update DB
+  };
+
   render () {
     const metaInfo = getMetricMetaInfo ();
+
+    if (this.props.alreadyLogged) {
+      return (
+        <View>
+          <Ionicons name="ios-happy-outline" size={100} />
+          <Text>You already logged your info for the day.</Text>
+          <TextButton onPress={this.reset}>
+            Reset
+          </TextButton>
+        </View>
+      );
+    }
     return (
       <View>
         <DateHeader date={new Date ().toLocaleDateString ()} />
